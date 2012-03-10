@@ -31,3 +31,10 @@ task :default do
     end
   end
 end
+
+task :submodules do
+  puts "Updating git submodules"
+  system('git submodule init')
+  system('git submodule update')
+  system('(cd vim && git submodule init && git submodule update)')
+end
