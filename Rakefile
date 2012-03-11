@@ -4,7 +4,8 @@ path_map =
   {
     'vim' => home+"/.vim",
     'vim/vimrc' => home+'/.vimrc',
-    'tmux/tmux.conf' => home+'/.tmux.conf'
+    'tmux/tmux.conf' => home+'/.tmux.conf',
+    'zsh/zshrc' => home+'/.zshrc'
   }
 task :default do
   path_map.each do |key, dest|
