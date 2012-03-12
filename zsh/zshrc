@@ -26,6 +26,22 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
+## from https://github.com/skwp/dotfiles/blob/master/zsh/zshrc
+
+# Things I don't want to publish to github
+[[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
+
+# # Give me my bash style incremental search
+bindkey '^R' history-incremental-search-backward
+
+# Speed up git completion
+# http://talkings.org/post/5236392664/zsh-and-slow-git-completion
+__git_files () {
+  _wanted files expl 'local files' _files
+}
+
+## end https://github.com/skwp/dotfiles/blob/master/zsh/zshrc
+
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
