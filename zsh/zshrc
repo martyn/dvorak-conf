@@ -28,8 +28,6 @@ plugins=(git)
 
 ## from https://github.com/skwp/dotfiles/blob/master/zsh/zshrc
 
-# Things I don't want to publish to github
-[[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
 # # Give me my bash style incremental search
 bindkey '^R' history-incremental-search-backward
@@ -43,7 +41,6 @@ __git_files () {
 ## end https://github.com/skwp/dotfiles/blob/master/zsh/zshrc
 
 source $ZSH/oh-my-zsh.sh
-unsetopt correct_all
 
 # Customize to your needs...
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
@@ -54,3 +51,6 @@ nvm use v0.6.11
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
+# Things I don't want to publish to github
+[[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
+unsetopt correct_all
