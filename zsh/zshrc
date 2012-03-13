@@ -47,12 +47,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/lo
 source ~/.nvm/nvm.sh
 nvm use v0.6.11
 
-[[ -s "~/.rvm/scripts/rvm" ]] && source "~/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 unsetopt correct_all
