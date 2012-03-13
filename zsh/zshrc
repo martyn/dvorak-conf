@@ -56,3 +56,4 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 unsetopt correct_all
+export TERM=xterm-256color tmux
