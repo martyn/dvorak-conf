@@ -57,3 +57,7 @@ export PATH=$PATH:~/.rvm/bin
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 unsetopt correct_all
 export TERM=xterm-256color tmux
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=/usr/local/mysql/bin:$HOME/.rbenv/bin:$PATH
+eval "$(rbenv init -)"
