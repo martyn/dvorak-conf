@@ -1,0 +1,14 @@
+# ~/.tmuxinator/merchant.yml
+# you can make as many tabs as you wish...
+project_name: Merchant Tools
+project_root: ~/dev/skuloop/merchant/merchant
+socket_name: merchant 
+pre: echo -ne "\e]1;[R] Merchant Tools\a"
+tabs:
+  - merchant: 
+      layout: main-horizontal
+      panes:
+        - grails run-app -https
+        - compass watch
+  - edit: vim
+  - prod: ssh -i ~/.ssh/crocs.pem ubuntu@ec2-184-169-214-33.us-west-1.compute.amazonaws.com

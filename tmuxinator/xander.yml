@@ -1,0 +1,13 @@
+# ~/.tmuxinator/xander.yml
+# you can make as many tabs as you wish...
+
+project_name: Xander
+project_root: ~/dev/255bits/Xander
+socket_name: xander # Not needed.  Remove to use default socket
+tabs:
+  - gitrun:
+      layout: main-vertical
+      panes:
+        - git pull
+        - giles -s public/ #empty, will just run plain bash
+  - edit: vim

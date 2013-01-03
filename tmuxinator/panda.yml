@@ -1,0 +1,14 @@
+# ~/.tmuxinator/panda.yml
+# you can make as many tabs as you wish...
+
+project_name: My Panda Support
+project_root: ~/dev/hackathon
+socket_name: panda # Not needed.  Remove to use default socket
+tabs:
+  - run:
+      layout: main-vertical
+      panes:
+        - nodemon twilio/app
+        - git pull
+  - edit: vim
+  - server: ssh panda@mypandasupport.com

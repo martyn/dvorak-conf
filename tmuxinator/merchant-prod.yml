@@ -1,0 +1,21 @@
+# ~/.tmuxinator/merchant-prod.yml
+# you can make as many tabs as you wish...
+
+project_name: Tmuxinator
+project_root: ~/dev/skuloop/merchant
+socket_name: foo # Not needed.  Remove to use default socket
+tabs:
+  - Merchant Prod SQS:
+      layout: tiled
+      panes:
+        - ssh -i ~/.ssh/crocs.pem -l ubuntu ec2-54-241-80-44.us-west-1.compute.amazonaws.com
+  - Merchant Prod Webapps:
+      layout: tiled
+      panes:
+        - ssh -i ~/.ssh/crocs.pem -l ubuntu ec2-54-241-90-18.us-west-1.compute.amazonaws.com
+        - ssh -i ~/.ssh/crocs.pem -l ubuntu ec2-54-241-97-174.us-west-1.compute.amazonaws.com
+        - ssh -i ~/.ssh/crocs.pem -l ubuntu ec2-54-241-86-139.us-west-1.compute.amazonaws.com
+        - ssh -i ~/.ssh/crocs.pem -l ubuntu ec2-54-241-87-105.us-west-1.compute.amazonaws.com
+        - ssh -i ~/.ssh/crocs.pem -l ubuntu ec2-204-236-148-31.us-west-1.compute.amazonaws.com
+        
+

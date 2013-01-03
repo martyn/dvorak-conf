@@ -18,7 +18,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
@@ -45,8 +45,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
-source ~/.nvm/nvm.sh
-nvm use v0.6.11 || true
+[[ -s "$HOME/.nvm/nvm" ]] && source ~/.nvm/nvm.sh
+[[ -s "$HOME/nvm/nvm" ]] && source ~/nvm/nvm.sh
 
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
@@ -57,3 +57,11 @@ export PATH=$PATH:~/.rvm/bin
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 unsetopt correct_all
 export TERM=xterm-256color tmux
+
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+function project()  {
+  echo -ne "\e]1;$1\a" && tmuxinator $1
+}
+
+export EDITOR='vim'
