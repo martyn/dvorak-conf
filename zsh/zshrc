@@ -65,3 +65,7 @@ function project()  {
 }
 
 export EDITOR='vim'
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=/usr/local/mysql/bin:$HOME/.rbenv/bin:$PATH
+eval "$(rbenv init -)"
