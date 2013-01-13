@@ -46,7 +46,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
 source ~/.nvm/nvm.sh
-nvm use v0.6.11 || true
+nvm use v0.8.4 || true
 
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
@@ -61,3 +61,6 @@ export TERM=xterm-256color tmux
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=/usr/local/mysql/bin:$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
+alias mochac='mocha --compilers coffee:coffee-script'
+export NODE_PATH=/usr/local/lib/node_modules
+alias brick='cd ~/dev/work/brickftp/'
