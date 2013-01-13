@@ -9,3 +9,9 @@ vim
 
 tmux
 [INDEX]
+
+# Installation
+```sh
+rake submodules
+rake # will symlink the dotfiles
+```

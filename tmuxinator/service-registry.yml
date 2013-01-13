@@ -1,0 +1,11 @@
+# you can make as many tabs as you wish...
+
+project_name: Service Registry
+project_root: ~/dev/skuloop/serviceRegistry
+tabs:
+  - run:
+      layout: main-vertical
+      panes:
+        - 
+        - #empty, will just run plain bash
+  - edit: vim README.md

@@ -6,7 +6,8 @@ path_map =
     'vim/vimrc' => home+'/.vimrc',
     'tmux/tmux.conf' => home+'/.tmux.conf',
     'zsh/zshrc' => home+'/.zshrc',
-    'git/gitconfig' => home + '/.gitconfig'
+    'git/gitconfig' => home + '/.gitconfig',
+    'tmuxinator' => home + '/.tmuxinator'
   }
 task :default do
   path_map.each do |key, dest|

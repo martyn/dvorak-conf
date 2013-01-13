@@ -1,0 +1,12 @@
+# ~/.tmuxinator/xander.yml
+# you can make as many tabs as you wish...
+
+project_name: Giles
+project_root: ~/giles
+socket_name: giles # Not needed.  Remove to use default socket
+tabs:
+  - gitrun:
+      layout: main-vertical
+      panes:
+        - git pull
+        - vim

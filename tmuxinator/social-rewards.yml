@@ -1,0 +1,15 @@
+# ~/.tmuxinator/social_rewards.yml
+# you can make as many tabs as you wish...
+
+project_name: Social Rewards
+project_root: ~/dev/skuloop/social-api
+socket_name: foo # Not needed.  Remove to use default socket
+pre: ~/software/redis-2.4.16/src/redis-server &> /dev/null &
+tabs:
+  - social_rewards:
+      layout: main-vertical
+      panes:
+        -
+        - cake start
+  - edit: vim
+  - server: ssh -i ~/.ssh/crocs.pem ubuntu@socialbuttons.skuloop.com

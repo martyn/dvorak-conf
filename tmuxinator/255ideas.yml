@@ -1,0 +1,15 @@
+# ~/.tmuxinator/255ideas.yml
+# you can make as many tabs as you wish...
+
+project_name: 255 Ideas
+project_root: ~/dev/255bits/255ideas/
+socket_name: 255ideas # Not needed.  Remove to use default socket
+pre: ~/software/redis-2.4.16/src/redis-server &> /dev/null &
+tabs:
+  - run:
+      layout: main-vertical
+      panes:
+        - cake start
+        - #empty, will just run plain bash
+  - edit: vim README.md
+  - server: ssh ubuntu@www.255ideas.com
