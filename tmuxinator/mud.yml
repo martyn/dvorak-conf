@@ -1,0 +1,8 @@
+# ~/.tmuxinator/255ideas.yml
+# you can make as many tabs as you wish...
+
+project_name: mud
+project_root: ~/
+socket_name: mud # Not needed.  Remove to use default socket
+tabs:
+  - dsl: tt\+\+ dsl.tin

@@ -1,0 +1,8 @@
+# ~/.tmuxinator/255ideas.yml
+# you can make as many tabs as you wish...
+
+project_name: Crawl
+project_root: ~/
+socket_name: crawl # Not needed.  Remove to use default socket
+tabs:
+  - remote: ssh crawlus.somatika.net

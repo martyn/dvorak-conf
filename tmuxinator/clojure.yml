@@ -1,0 +1,8 @@
+# ~/.tmuxinator/255ideas.yml
+# you can make as many tabs as you wish...
+
+project_name: Clojure
+project_root: ~/dev/clojure
+socket_name: clojure # Not needed.  Remove to use default socket
+tabs:
+  - main: 
