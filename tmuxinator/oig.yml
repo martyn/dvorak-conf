@@ -1,0 +1,17 @@
+# ~/.tmuxinator/oig.yml
+# you can make as many tabs as you wish...
+
+project_name: oig
+project_root: ~/dev/work/oig
+socket_name: oig # Not needed.  Remove to use default socket
+tabs:
+  - gitrun:
+      layout: main-horizontal
+      panes:
+        - git pull
+        - vim
+  - server:
+      layout: main-horizontal
+      panes:
+        - ~/apps/redis-2.4.15/src/redis-server
+        - rails server
