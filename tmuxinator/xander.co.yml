@@ -2,7 +2,7 @@
 # you can make as many tabs as you wish...
 
 project_name: Xander-co
-project_root: ~/dev/255bits/xander.co
+project_root: ~/dev/xander.co
 socket_name: xander-co # Not needed.  Remove to use default socket
 tabs:
   - run:

@@ -72,3 +72,4 @@ eval "$(rbenv init -)"
 alias mochac='mocha --compilers coffee:coffee-script'
 export NODE_PATH=/usr/local/lib/node_modules
 alias brick='cd ~/dev/work/brickftp/'
+source ~/.nvm/nvm.sh

@@ -1,0 +1,8 @@
+# ~/.tmuxinator/255ideas.yml
+# you can make as many tabs as you wish...
+
+project_name: irc
+project_root: ~/
+socket_name: irc # Not needed.  Remove to use default socket
+tabs:
+  - freenet: irssi

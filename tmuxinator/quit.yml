@@ -1,0 +1,16 @@
+# ~/.tmuxinator/quit.yml
+# you can make as many tabs as you wish...
+
+project_name: Quit
+project_root: ~/dev/quit
+socket_name: quit # Not needed.  Remove to use default socket
+tabs:
+  - gitrun:
+      layout: main-vertical
+      panes:
+        - git pull
+        - vim
+  - server:
+      layout: main-horizontal
+      panes:
+        - rails server
