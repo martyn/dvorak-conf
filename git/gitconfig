@@ -2,7 +2,7 @@
 # set your user tokens as enivornment variables, such as ~/.secrets
 # See the README for examples.
 [color]
-  ui = true
+	ui = true
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -97,7 +97,7 @@
   # the usual default is to push all branches
   default = tracking
 [core]
-  autocrlf = false
+	autocrlf = input
   editor = vim
   excludesfile = ~/.yadr/gitignore_global
 [advice]
@@ -111,5 +111,5 @@
   # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
   enabled = true
 [user]
-	name = Martyn Garcia
-	email = martyn.garcia@gmail.com
+	name = Mikkel Garcia
+	email = mikkel@255bits.com

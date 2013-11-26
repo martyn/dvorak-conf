@@ -50,9 +50,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:/bin:/usr/sbin:/sbin:/usr/local/bin:/
 
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
-export PATH=$PATH:~/.rvm/bin
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 unsetopt correct_all
@@ -66,7 +64,6 @@ function project()  {
 
 export EDITOR='vim'
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=/usr/local/mysql/bin:$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
 alias mochac='mocha --compilers coffee:coffee-script'
@@ -80,3 +77,22 @@ export PATH=/usr/local/php5/bin:$PATH
 
 export CLOJURESCRIPT_HOME=/Users/martyn/dev/clojure/coursera/clojurescript
 export PATH=/Users/martyn/dev/clojure/coursera/clojurescript/bin:$PATH
+
+alias c pbcopy
+alias v pbpaste
+
+file-to-clipboard() {
+    osascript \
+        -e 'on run args' \
+        -e 'set the clipboard to POSIX file (first item of args)' \
+        -e end \
+        "$@"
+}
+
+
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+export RBENV_VERSION=
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
