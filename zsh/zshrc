@@ -44,7 +44,7 @@ __git_files () {
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/opt/local/bin:/opt/local/sbin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/usr/X11/bin:/usr/local/git/bin:/usr/local/share/npm/bin
+export PATH=/opt/local/bin:/opt/local/sbin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/usr/X11/bin:/usr/local/git/bin:/usr/local/share/npm/bin:/usr/local/sbin
 [[ -s "$HOME/.nvm/nvm" ]] && source ~/.nvm/nvm.sh
 [[ -s "$HOME/nvm/nvm" ]] && source ~/nvm/nvm.sh
 
@@ -75,8 +75,15 @@ alias brick='cd ~/dev/work/brickftp/'
 source ~/.nvm/nvm.sh
 export RBENV_VERSION=
 export SPEC_OPTS="--color"
-alias homefish-prod='ssh -i ~/.ssh/pair-programming.pem ubuntu@ec2-54-234-96-208.compute-1.amazonaws.com'
+alias homefish-prod='ssh -i ~/.ssh/pair-programming.pem ubuntu@54.204.27.235'
 export PATH=/usr/local/php5/bin:$PATH
 
 export CLOJURESCRIPT_HOME=/Users/martyn/dev/clojure/coursera/clojurescript
 export PATH=/Users/martyn/dev/clojure/coursera/clojurescript/bin:$PATH
+
+# android config 
+export PATH=$PATH:/Users/martyn/android/sdk/platform-tools/:/Users/martyn/android/sdk/tools/
+
+unset GVM_INIT
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/martyn/.gvm/bin/gvm-init.sh" ]] && source "/Users/martyn/.gvm/bin/gvm-init.sh"
