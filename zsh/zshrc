@@ -78,12 +78,12 @@ export SPEC_OPTS="--color"
 alias homefish-prod='ssh -i ~/.ssh/pair-programming.pem ubuntu@54.204.27.235'
 export PATH=/usr/local/php5/bin:$PATH
 
-export CLOJURESCRIPT_HOME=/Users/martyn/dev/clojure/coursera/clojurescript
-export PATH=/Users/martyn/dev/clojure/coursera/clojurescript/bin:$PATH
+export CLOJURESCRIPT_HOME=$HOME/dev/clojure/coursera/clojurescript
+export PATH=$HOME/dev/clojure/coursera/clojurescript/bin:$PATH
 
 # android config 
-export PATH=$PATH:/Users/martyn/android/sdk/platform-tools/:/Users/martyn/android/sdk/tools/
+export PATH=$PATH:$HOME/android/sdk/platform-tools/:$HOME/android/sdk/tools/
 
 unset GVM_INIT
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/martyn/.gvm/bin/gvm-init.sh" ]] && source "/Users/martyn/.gvm/bin/gvm-init.sh"
+[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
