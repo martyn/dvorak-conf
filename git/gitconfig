@@ -70,6 +70,7 @@
   sl = stash list                   # list stashes
   sa = stash apply                  # apply stash (restore changes)
   sd = stash drop                   # drop stashes (destory changes)
+  sp = stash pop                    # pop dem stash
 
   # status
   s = status                        # status
@@ -91,7 +92,8 @@
 [apply]
   whitespace = nowarn
 [branch]
-  autosetupmerge = true
+  autosetupmerge = always
+	autosetuprebase = always
 [push]
   # 'git push' will push the current branch to its tracking branch
   # the usual default is to push all branches
@@ -113,3 +115,4 @@
 [user]
 	name = Mikkel Garcia
 	email = mikkel@255bits.com
+	helper = osxkeychain
