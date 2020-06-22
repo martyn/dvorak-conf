@@ -45,8 +45,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/opt/local/bin:/opt/local/sbin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/usr/X11/bin:/usr/local/git/bin:/usr/local/share/npm/bin:/usr/local/sbin
-[[ -s "$HOME/.nvm/nvm" ]] && source ~/.nvm/nvm.sh
-[[ -s "$HOME/nvm/nvm" ]] && source ~/nvm/nvm.sh
+#[[ -s "$HOME/.nvm/nvm" ]] && source ~/.nvm/nvm.sh
+#[[ -s "$HOME/nvm/nvm" ]] && source ~/nvm/nvm.sh
 
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
@@ -92,7 +92,20 @@ file-to-clipboard() {
 export RBENV_VERSION=
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+#export PATH="/usr/local/heroku/bin:$PATH"
 
 # android config 
-export PATH=$PATH:$HOME/android/sdk/platform-tools/:$HOME/android/sdk/tools/
+#export PATH=$PATH:$HOME/android/sdk/platform-tools/:$HOME/android/sdk/tools/
+#export PATH=/home/martyn/dev/neural-doodle/pyvenv/bin:/usr/local/heroku/bin:/usr/local/php5/bin:/usr/local/mysql/bin:/home/martyn/.rbenv/bin:/opt/local/bin:/opt/local/sbin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/usr/X11/bin:/usr/local/git/bin:/usr/local/share/npm/bin:/usr/local/sbin:/home/martyn/android/sdk/platform-tools/:/home/martyn/android/sdk/tools/:/usr/local/cuda-7.5/bin:/usr/local/cuda-7.5/bin
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+#export ACML_FMA=0
+#export LD_LIBRARY_PATH=/opt/acml5.3.1/gfortran64/lib:/opt/acml5.3.1/gfortran64/lib:$LD_LIBRARY_PATH
+
+#source ./pyvenv/bin/activate
+eval "$(rbenv init -)"
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+#export SDKMAN_DIR="/home/martyn/.sdkman"
+#[[ -s "/home/martyn/.sdkman/bin/sdkman-init.sh" ]] && source "/home/martyn/.sdkman/bin/sdkman-init.sh"
+#source ~/.nvm/nvm.sh
