@@ -24,8 +24,8 @@ task :default do
       end
     rescue
       puts "not a symbolic link"
-      puts File.exists? dest
-      if(File.exists? dest) 
+      puts File.exist? dest
+      if(File.exist? dest) 
         puts "backing up " + dest + " to " + dest + '.bak'
         `mv #{dest} #{dest}.bak`
       end

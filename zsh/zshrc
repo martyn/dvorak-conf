@@ -64,12 +64,9 @@ function project()  {
 
 export EDITOR='vim'
 
-PATH=/usr/local/mysql/bin:$HOME/.rbenv/bin:$PATH
-eval "$(rbenv init -)"
 alias mochac='mocha --compilers coffee:coffee-script'
 export NODE_PATH=/usr/local/lib/node_modules
 alias brick='cd ~/dev/work/brickftp/'
-source ~/.nvm/nvm.sh
 export RBENV_VERSION=
 export SPEC_OPTS="--color"
 alias homefish-prod='ssh -i ~/.ssh/pair-programming.pem ubuntu@54.204.27.235'
@@ -102,10 +99,333 @@ export RBENV_VERSION=
 #export LD_LIBRARY_PATH=/opt/acml5.3.1/gfortran64/lib:/opt/acml5.3.1/gfortran64/lib:$LD_LIBRARY_PATH
 
 #source ./pyvenv/bin/activate
-eval "$(rbenv init -)"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 #export SDKMAN_DIR="/home/martyn/.sdkman"
 #[[ -s "/home/martyn/.sdkman/bin/sdkman-init.sh" ]] && source "/home/martyn/.sdkman/bin/sdkman-init.sh"
 #source ~/.nvm/nvm.sh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ntc/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ntc/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ntc/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ntc/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source ~/.nvm/nvm.sh
+xcl() {
+    xclip -selection clipboard < prompt.txt
+}
+
+[ -f ~/.secrets.zsh ] && source ~/.secrets.zsh   # keys live outside the repo
+# Function to write clipboard content to a file using xclip
+pcl() {
+    # Use patch.diff as the default filename if no argument is provided
+    local outfile="${1:-patch.diff}"
+    xclip -selection clipboard -o > "$outfile"
+    echo "Clipboard content written to $outfile. running gptpatch"
+    gptpatch $outfile
+    echo "Removing $outfile"
+    rm $outfile
+}
+
+opcl() {
+    # Use patch.diff as the default filename if no argument is provided
+    local outfile="${1:-patch.diff}"
+    xclip -selection clipboard -o > "$outfile"
+    echo "Clipboard content written to $outfile. running gptpatch"
+    git apply $outfile
+    echo "Removing $outfile"
+    rm $outfile
+}
+
+# Function: gitlin
+# Usage:
+#   gitlin <linear_issue_url>
+# Example:
+#   gitlin https://linear.app/levelheaded/issue/LEV-636/staging-build-fail
+gitlin() {
+  # Ensure a URL is provided.
+  if [ "$#" -ne 1 ]; then
+    echo "Usage: gitlin <linear_issue_url>"
+    return 1
+  fi
+
+  # Check for modified tracked files only (ignoring untracked files).
+  if ! git diff-index --quiet HEAD --; then
+    echo "Error: Your working directory has modified tracked files. Please stash your changes before running this command."
+    return 1
+  fi
+
+  local url="$1"
+
+  # Split the URL by '/'.
+  # For the URL:
+  #   https://linear.app/levelheaded/issue/LEV-636/staging-build-fail
+  # the resulting parts are:
+  #   parts[1] = "https:"
+  #   parts[2] = "" (empty)
+  #   parts[3] = "linear.app"
+  #   parts[4] = "levelheaded"
+  #   parts[5] = "issue"
+  #   parts[6] = "LEV-636"
+  #   parts[7] = "staging-build-fail"
+  IFS='/' read -A parts <<< "$url"
+
+  if [ ${#parts[@]} -lt 7 ]; then
+    echo "Error: Invalid URL format."
+    return 1
+  fi
+
+  local issue_id="${parts[6]}"
+  local desc_branch="${parts[7]}"
+
+  # Convert issue ID to lowercase.
+  local issue_id_lower
+  issue_id_lower=$(echo "$issue_id" | tr '[:upper:]' '[:lower:]')
+
+  # Construct the branch name in the form: staging-build-fail-lev-636.
+  local branch_name="${desc_branch}-${issue_id_lower}"
+
+  echo "Creating branch: $branch_name"
+
+  # Execute the git commands.
+  git checkout staging || return
+  git pull || return
+  git checkout -b "$branch_name" || return
+
+  # Set the upstream to the remote branch with the same name.
+  git push -u origin HEAD || return
+  gh pr create --base staging --head "$branch_name" --title "$branch_name" --body "Closes issue $issue_id" || return
+
+  echo "Branch '$branch_name' created and upstream set to origin/$branch_name."
+}
+
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export LIBVA_DRIVER_NAME=iHD
+export APP_MANAGER=34.216.72.25
+export APP_WORKERS=52.12.72.109
+wt-open() {
+  branch="$1"
+  if [ -z "$branch" ]; then
+    echo "Usage: wt-open <branch-name>"
+    return 1
+  fi
+  git worktree add "worktrees/$branch" -b "$branch" && \
+  cd "worktrees/$branch" && \
+  git push -u origin "$branch"
+}
+
+wt-merge() {
+  # If argument is given, use it; else, detect current branch
+  repo_root=$(git rev-parse --show-toplevel)
+  if [ -n "$1" ]; then
+    branch="$1"
+    worktree_path="worktrees/$branch"
+  else
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    # Detect worktree path from CWD
+    # Assumes CWD is .../worktrees/<branch>
+    worktree_path=$(realpath --relative-to="$repo_root" "$PWD")
+    # If not in worktree, fallback to standard path
+    if [[ "$worktree_path" != worktrees/* ]]; then
+      worktree_path="worktrees/$branch"
+    fi
+    cd "$repo_root"
+  fi
+
+  gh pr merge --merge --delete-branch && git push origin --delete "$branch" 2> /dev/null
+  git worktree remove "$worktree_path"
+}
+
+pr-create() {
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  git push -u origin "$branch"
+  gh pr create --fill --base main
+}
+
+wt-abort() {
+  branch="$1"
+  if [ -z "$branch" ]; then
+    echo "Usage: wt-abort <branch-name>"
+    return 1
+  fi
+  worktree_path="worktrees/$branch"
+
+  # Attempt to close PR if it exists
+  if gh pr view "$branch" &>/dev/null; then
+    gh pr close "$branch" --delete-branch
+  fi
+
+  # Delete remote branch (ignore error if doesn't exist)
+  git push origin --delete "$branch" 2>/dev/null
+
+  # Remove worktree (force if needed)
+  git worktree remove --force "$worktree_path" 2>/dev/null
+
+  # Delete local branch if exists
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git branch -D "$branch"
+  fi
+
+  # Remove the directory if it still exists
+  if [ -d "$worktree_path" ]; then
+    rm -rf "$worktree_path"
+  fi
+
+  echo "✅ Worktree, branch, and PR for '$branch' nuked."
+}
+
+wt-add() {
+  branch="$1"
+  if [ -z "$branch" ]; then
+    echo "Usage: wt-add <branch-name>"
+    return 1
+  fi
+  git worktree add "worktrees/$branch" "$branch" && \
+  cd "worktrees/$branch"
+}
+
+# Auto-reactivate Conda env in new tmux panes/windows
+
+if [ -n "$TMUX" ]; then
+    CONDA_ENV_FILE="$HOME/.active_conda_env"
+    if [ -f "$CONDA_ENV_FILE" ]; then
+        export CONDA_DEFAULT_ENV=$(cat "$CONDA_ENV_FILE")
+        if [ -n "$CONDA_DEFAULT_ENV" ] && [ "$CONDA_DEFAULT_ENV" != "base" ]; then
+            conda activate "$CONDA_DEFAULT_ENV" 2>/dev/null
+        fi
+    fi
+fi
+
+function activate-conda-tmux() {
+    conda activate "$1" && \
+    tmux set-environment CONDA_DEFAULT_ENV "$1" && \
+    echo "$1" > ~/.active_conda_env
+}
+wt-sync() {
+  local worktrees_dir="worktrees"
+  mkdir -p "$worktrees_dir"
+
+  # 1️⃣  Sync refs & prune stale remote branches / stale worktree metadata
+  git fetch --all --prune
+  git worktree prune
+
+  # 2️⃣  List all current remote branch names (trimmed)
+  local remote_branches
+  remote_branches=("${(@f)$(git branch -r \
+                         | grep -v '\->' \
+                         | sed 's|origin/||' \
+                         | grep -v '^HEAD$' \
+                         | xargs)}")
+
+  # Helper: test membership
+  local rb_list=" ${remote_branches[*]} "
+
+  # 3️⃣  Add / update every remote branch
+  for branch in $remote_branches; do
+    local safe_branch="${branch//\//-}"
+    local wtree_dir="$worktrees_dir/$safe_branch"
+
+    # Ensure a tracking local branch exists
+    if ! git show-ref --verify --quiet "refs/heads/$branch"; then
+      git branch --track "$branch" "origin/$branch" 2>/dev/null || true
+    fi
+
+    if [ -d "$wtree_dir" ]; then
+      echo "Updating $branch in $wtree_dir"
+      git -C "$wtree_dir" fetch origin "$branch"
+      git -C "$wtree_dir" reset --hard "origin/$branch"
+    else
+      echo "Adding $branch → $wtree_dir"
+      git worktree add -B "$branch" "$wtree_dir" "origin/$branch"
+    fi
+  done
+
+  # 4️⃣  Find every existing worktree under worktrees/
+  for wdir in "$worktrees_dir"/*; do
+    [ -d "$wdir" ] || continue
+
+    # Which branch is really checked out here?
+    local wbranch
+    wbranch=$(git -C "$wdir" symbolic-ref --quiet --short HEAD 2>/dev/null) || continue
+
+    # If that branch no longer exists remotely, prune the worktree
+    if [[ ! "$rb_list" == *" $wbranch "* ]]; then
+      echo "Pruning orphaned worktree $wdir (branch $wbranch deleted upstream)"
+      git worktree remove --force "$wdir"
+      git branch -D "$wbranch" 2>/dev/null || true
+    fi
+  done
+
+  echo "✅ Worktrees fully synced."
+}
+
+# ----------  add to ~/.zshrc  ----------
+wt-pull () {
+  if [[ -z "$1" ]]; then
+    echo "usage: wt-pull <pull-request-url | branch-name>"; return 1
+  fi
+
+  local input="$1"
+  local branch
+
+  # If the argument looks like a URL, ask GitHub CLI for the branch behind the PR
+  if [[ "$input" =~ ^https?:// ]]; then
+    # extract the numeric PR id (last slash-separated field)
+    local pr=$(echo "$input" | awk -F'/' '{print $NF}')
+    # require: gh CLI authenticated in this repo
+    branch=$(gh pr view "$pr" --json headRefName -q .headRefName) || return
+  else
+    branch="$input"
+  fi
+
+  # Dir name: replace slashes with dashes so worktree names stay flat
+  local dir="worktrees/$(echo "$branch" | tr '/' '-')"
+
+  echo "⏩  Adding worktree $dir for branch $branch"
+  git worktree add "$dir" "$branch" || return
+
+  cd "$dir" || return
+  echo "📦  [disabled] Installing dependencies…"
+
+  # If there’s an .env two levels up, copy it for convenience
+  [[ -f ../../.env ]] && cp ../../.env .
+
+  echo "🚀  Launching dev server…"
+  npm run dev
+}
+# ----------  end snippet  ----------
+
+export NODE_OPTIONS="--max_old_space_size=4096"
+. "$HOME/.cargo/env"
+export PATH="$(npm config get prefix)/bin:$PATH"
+
+export PATH="$HOME/.local/bin:$PATH"
+
+export PATH="$HOME/bin:$PATH"
+
+# bun completions
+[ -s "/home/ntc/.bun/_bun" ] && source "/home/ntc/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.nanocode/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+# <<< grok installer <<<
